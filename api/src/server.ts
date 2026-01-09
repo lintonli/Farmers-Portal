@@ -2,11 +2,15 @@ import express, {json} from 'express'
 import dotenv from 'dotenv'
 import logger from './utils/logger';
 import { checkDatabaseConnection } from './prisma/db';
+import userRoutes from './routes/userRoutes';
 
 
 dotenv.config();
 const app = express();
 app.use(json());
+
+// Routes
+app.use('/api/users', userRoutes);
 
 /**
  * Handle uncaught exceptions

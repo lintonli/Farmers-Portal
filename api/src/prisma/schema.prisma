@@ -12,12 +12,13 @@ datasource db {
   provider = "postgresql"
 }
 model User {
-  id            Int      @id @default(autoincrement())
+  id            String   @id @default(uuid()) @db.Uuid
+  
   firstName     String
   lastName      String
   email         String   @unique
-  password      String?
-  phoneNumber          String
+  password      String
+  phoneNumber          String?
   role          Role     @default(farmer) 
   createdAt     DateTime @default(now())
 
@@ -28,7 +29,7 @@ model User {
 // 2. Farmers table: stores farm details + certification status
 model Farmer {
   id                Int      @id @default(autoincrement())
-  userId            Int      @unique
+  userId            String   @unique @db.Uuid
   user              User     @relation(fields: [userId], references: [id])
   farmSize          Float    
   cropType          String   

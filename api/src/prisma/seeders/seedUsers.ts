@@ -31,7 +31,6 @@ async function seed(){
                     phoneNumber: '',
                     password: await hashPassword(email),
                     role: 'admin',
-                    
                 },
             });
         }
