@@ -145,12 +145,13 @@ export const updateCertificationStatus=async(req:Request, res:Response) => {
 }
 
 
-export const getFarmerStatus = async(req: ExtendedRequest, res: Response) => {
+// Get farmer status by ID (Both admins and farmers can view)
+export const getFarmerStatusById = async(req: Request, res: Response) => {
     try {
-        const id = req.info?.sub;
+        const { id } = req.params;
 
         if (!id) {
-            return res.status(401).json({ message: "Unauthorized" });
+            return res.status(400).json({ message: "Farmer ID is required" });
         }
 
         const user = await prisma.user.findUnique({
@@ -159,7 +160,7 @@ export const getFarmerStatus = async(req: ExtendedRequest, res: Response) => {
         });
 
         if (!user) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(404).json({ message: "Farmer not found" });
         }
 
         if (!user.farmer) {
@@ -168,7 +169,8 @@ export const getFarmerStatus = async(req: ExtendedRequest, res: Response) => {
 
         return res.status(200).json({
             message: "Status retrieved successfully",
-            user: {
+            farmer: {
+                id: user.id,
                 name: `${user.firstName} ${user.lastName}`,
                 email: user.email,
                 farmSize: user.farmer.farmSize,
@@ -179,7 +181,7 @@ export const getFarmerStatus = async(req: ExtendedRequest, res: Response) => {
         });
 
     } catch (error) {
-        logger.error('Error getting farmer status:');
+        logger.error('Error getting farmer status by ID:');
         return res.status(500).json(error);
     }
 }

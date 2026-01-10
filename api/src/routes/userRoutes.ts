@@ -4,9 +4,9 @@ import {
     loginUser, 
     getUsers, 
     updateCertificationStatus,
-    getFarmerStatus 
+    getFarmerStatusById
 } from '../controllers/userController';
-import { verifyToken, requireAdmin, requireFarmer } from '../middleware/authMiddleware';
+import { verifyToken, requireAdmin } from '../middleware/authMiddleware';
 
 const router = Router();
 
@@ -18,7 +18,7 @@ router.post('/login', loginUser);
 router.get('/farmers', verifyToken, requireAdmin, getUsers);
 router.patch('/farmers/:userId/status', verifyToken, requireAdmin, updateCertificationStatus);
 
-// Protected routes - Farmer only
-router.get('/my-status', verifyToken, requireFarmer, getFarmerStatus);
+
+router.get('/farmers/:id/status', verifyToken, getFarmerStatusById);
 
 export default router;
