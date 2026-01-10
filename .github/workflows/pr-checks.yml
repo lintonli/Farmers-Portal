@@ -1,0 +1,47 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-checks:
+    name: PR Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Full history for better analysis
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check backend changes
+        working-directory: ./api
+        run: |
+          npm ci
+          npx tsc --noEmit
+          npx prisma generate
+          echo "✅ Backend TypeScript checks passed"
+
+      - name: Check frontend changes
+        working-directory: ./ui
+        run: |
+          npm ci
+          npx tsc --noEmit
+          npm run build
+          echo "✅ Frontend checks passed"
+        env:
+          CI: false
+
+      - name: PR Summary
+        run: |
+          echo "## ✅ Pull Request Checks Passed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Backend TypeScript compilation" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Frontend build successful" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Prisma schema valid" >> $GITHUB_STEP_SUMMARY
