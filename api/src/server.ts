@@ -3,10 +3,19 @@ import dotenv from 'dotenv'
 import logger from './utils/logger';
 import { checkDatabaseConnection } from './prisma/db';
 import userRoutes from './routes/userRoutes';
+import cors from 'cors'
 
 
 dotenv.config();
 const app = express();
+
+app.use(
+  cors({
+    // origin: process.env.FRONTEND_?.replace(/\/$/, ''), // Remove trailing slashURL
+    origin:process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
 app.use(json());
 
 // Routes
