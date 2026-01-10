@@ -145,7 +145,7 @@ export const updateCertificationStatus=async(req:Request, res:Response) => {
 }
 
 
-// Get farmer status by ID (Both admins and farmers can view)
+
 export const getFarmerStatusById = async(req: Request, res: Response) => {
     try {
         const { id } = req.params;

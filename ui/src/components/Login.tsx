@@ -29,7 +29,6 @@ const Login = () => {
       await loginUser(formData);
       const user = getUserFromToken();
       
-      // Redirect based on role
       if (user.role === 'admin') {
         navigate('/admin/dashboard');
       } else {

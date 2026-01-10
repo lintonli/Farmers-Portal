@@ -10,14 +10,11 @@ import { verifyToken, requireAdmin } from '../middleware/authMiddleware';
 
 const router = Router();
 
-// Public routes
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 
-// Protected routes - Admin only
 router.get('/farmers', verifyToken, requireAdmin, getUsers);
 router.patch('/farmers/:userId/status', verifyToken, requireAdmin, updateCertificationStatus);
-
 
 router.get('/farmers/:id/status', verifyToken, getFarmerStatusById);
 
