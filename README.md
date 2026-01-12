@@ -29,7 +29,7 @@ A full-stack application for managing farmer certifications where farmers can re
 -  Decline farmer applications
 -  Dashboard with statistics (total, pending, certified, declined)
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Backend
 - **Node.js** with **Express.js** (v5.2.1)
