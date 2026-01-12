@@ -80,7 +80,7 @@ export const loginUser = async(req:Request, res:Response)=>{
 
 
     } catch (error) {
-        console.log("fhdbfjdf",error)
+        logger.error(`Error logging in:`)
         return res.status(500).json({message:"Login failed", error});
     }
 }
@@ -101,8 +101,10 @@ export const getUsers:RequestHandler= async(req, res)=>{
         if(users.length === 0){
             return res.status(404).json({message:"No Farmers found"})
         }
+        logger.info(`Successfully Fetched Farmers`)
         return res.status(200).json({message:'Farmers successfully retrieved', users})
     } catch (error) {
+        logger.error(`Error retrieving farmers.`)
         return res.status(500).json(error);
     }
 }
