@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import Register from './components/Register';
 import Login from './components/Login';
 import FarmerDashboard from './components/FarmerDashboard';
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <Router>
+      <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/register" element={<Register />} />

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { getAllFarmers, updateCertificationStatus, getUserFromToken, logoutUser } from '../Services/api';
 import type { User } from '../Types';
 
@@ -36,9 +37,9 @@ const AdminDashboard = () => {
       setUpdating(userId);
       await updateCertificationStatus(userId, { status });
       await loadFarmers();
-      alert(`Status updated to ${status}`);
+      toast.success(`Status updated to ${status}`);
     } catch (err: any) {
-      alert(err.message || 'Failed to update status');
+      toast.error(err.message || 'Failed to update status');
     } finally {
       setUpdating(null);
     }

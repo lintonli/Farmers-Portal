@@ -6,7 +6,9 @@
   "scripts": {
     "start:build": "tsc -w",
     "start:run": "nodemon dist/server.js",
-    "start": "concurrently npm:start:*"
+    "start": "concurrently npm:start:*",
+    "build": "tsc",
+    "dev": "concurrently npm:start:*"
   },
   "author": "Linton Edimund",
   "license": "ISC",
@@ -38,6 +40,7 @@
     "@types/cors": "^2.8.19",
     "@types/node": "^25.0.3",
     "@types/pg": "^8.16.0",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0"
   }
 }

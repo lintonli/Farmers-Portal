@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { registerFarmer } from '../Services/api';
 import type { RegisterData } from '../Types';
 
@@ -32,7 +33,7 @@ const Register = () => {
 
     try {
       await registerFarmer(formData);
-      alert('Registration successful! Please login.');
+      toast.success('Registration successful! Please login.');
       navigate('/login');
     } catch (err: any) {
       setError(err.message || 'Registration failed');
