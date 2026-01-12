@@ -40,14 +40,3 @@ export function requireAdmin(req: ExtendedRequest, res: Response, next: NextFunc
     next();
 }
 
-export function requireFarmer(req: ExtendedRequest, res: Response, next: NextFunction) {
-    if (!req.info) {
-        return res.status(401).json({ message: 'Authentication required' });
-    }
-
-    if (req.info.role !== 'farmer') {
-        return res.status(403).json({ message: 'Farmer access required' });
-    }
-
-    next();
-}

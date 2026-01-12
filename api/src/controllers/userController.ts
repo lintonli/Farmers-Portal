@@ -5,7 +5,7 @@ import { generateToken, hashPassword, verifyPassword } from '../utils/authUtils'
 import { prisma } from '../prisma/db';
 import { loginSchema } from '../utils/loginValidator';
 import logger from '../utils/logger';
-import { ExtendedRequest } from '../middleware/authMiddleware';
+
 
 
 
