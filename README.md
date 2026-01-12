@@ -467,12 +467,10 @@ Farmers-Portal/
 - Crop type is free text (could be normalized to enum in production)
 - Once declined, a farmer must contact support (no re-application flow)
 - No email verification required for registration
-- Admin account is pre-seeded (email: admin@example.com, password: admin123)
+- Admin account is pre-seeded (email: admin@example.com, password: admin@example.com)
 
 ### 5. **Frontend**
 - Runs on development server (Vite) - not optimized for production
-- No offline support or PWA features
-- Browser back button may cause auth issues (could be improved with route guards)
 - No pagination on admin farmer list (assumes reasonable data size)
 
 ### 6. **Docker**
